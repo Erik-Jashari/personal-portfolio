@@ -22,17 +22,11 @@ const PROJECTS = [
 ];
 
 const SKILLS = [
-  "PHP",
-  "JavaScript",
-  "Java",
-  "HTML",
-  "CSS",
-  "React",
-  "Node.js",
-  "Express.js",
-  "MySQL",
-  "PostgreSQL",
-  "Git",
+  { group: "Languages", items: ["PHP", "JavaScript", "Java"] },
+  { group: "Frontend", items: ["HTML", "CSS", "React"] },
+  { group: "Backend", items: ["Node.js", "Express.js"] },
+  { group: "Databases", items: ["MySQL", "PostgreSQL"] },
+  { group: "Tools", items: ["Git", "GitHub", "VS Code"] },
 ];
 
 const EXPERIENCE = [
@@ -65,10 +59,31 @@ export default function Home() {
               About
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-muted">
-              Placeholder bio. A few sentences on who you are, what you build,
-              and what you care about &mdash; swap this in for real copy and a
-              portrait image.
+              I&apos;m a Computer Science and Engineering student at UBT, Kosovo,
+              building full-stack projects end to end &mdash; from schema design
+              and auth to real-time features and the UI on top. I like picking
+              apart how things work and shipping practical, working software
+              over polishing theory. Outside of code, I&apos;m usually behind
+              the bar pulling shots between pull requests.
             </p>
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm uppercase tracking-wide text-muted">
+              <a
+                href="https://github.com/Erik-Jashari"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-accent"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/eriki-jashari-204752354/"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-accent"
+              >
+                LinkedIn
+              </a>
+            </div>
           </section>
         </Reveal>
 
@@ -123,14 +138,23 @@ export default function Home() {
             <h2 className="font-display text-4xl text-white sm:text-5xl">
               Skills
             </h2>
-            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-4">
-              {SKILLS.map((skill) => (
-                <span
-                  key={skill}
-                  className="font-display text-xl text-white/70 transition-colors hover:text-accent sm:text-2xl"
-                >
-                  {skill}
-                </span>
+            <div className="mt-10 flex flex-col gap-8">
+              {SKILLS.map((group) => (
+                <div key={group.group}>
+                  <p className="text-xs uppercase tracking-[0.3em] text-accent/80">
+                    {group.group}
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-x-8 gap-y-2">
+                    {group.items.map((skill) => (
+                      <span
+                        key={skill}
+                        className="font-display text-xl text-white/70 transition-colors hover:text-accent sm:text-2xl"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </section>
