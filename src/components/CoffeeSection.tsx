@@ -1,60 +1,22 @@
-"use client";
-
-import { useCallback, useRef } from "react";
-import gsap from "gsap";
-import { drawFrame } from "./coffeeFrame";
-import { usePinnedCanvasScrub } from "./usePinnedCanvasScrub";
-
-const COFFEE_PIN_END = "+=200%";
-const TEXT_REVEAL_START = 0.72;
-
 export default function CoffeeSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-
-  const onProgress = useCallback((progress: number) => {
-    const text = textRef.current;
-    if (!text) return;
-    const textProgress = Math.min(
-      Math.max((progress - TEXT_REVEAL_START) / (1 - TEXT_REVEAL_START), 0),
-      1
-    );
-    gsap.set(text, {
-      opacity: textProgress,
-      y: 24 * (1 - textProgress),
-    });
-  }, []);
-
-  const reducedMotion = usePinnedCanvasScrub({
-    sectionRef,
-    canvasRef,
-    pinEnd: COFFEE_PIN_END,
-    draw: drawFrame,
-    onProgress,
-    staticProgress: 0.9,
-  });
-
   return (
     <section
       id="coffee"
-      ref={sectionRef}
-      className="relative h-screen w-full overflow-hidden bg-black"
+      className="relative flex min-h-[70vh] w-full items-center justify-center overflow-hidden px-6 py-32 text-center"
     >
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-black/30" />
-
       <div
-        ref={textRef}
-        className={`absolute inset-x-0 bottom-20 z-10 flex flex-col items-center px-6 text-center ${
-          reducedMotion ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <h2 className="font-display text-4xl text-white sm:text-6xl">
-          BEHIND THE BAR
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url(/coffee-bg.jpg)" }}
+      />
+      <div className="absolute inset-0 bg-black/70" />
+
+      <div className="relative z-10 mx-auto max-w-3xl">
+        <h2 className="font-display text-4xl text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] sm:text-5xl">
+          Behind the Bar
         </h2>
-        <p className="mt-4 text-sm uppercase tracking-[0.35em] text-white/70 sm:text-base">
-          Barista &amp; waiter &mdash; pulling shots between pull requests
+        <p className="mt-6 text-lg leading-relaxed text-white/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.8)]">
+          Hi again! I worked as a barista and waiter for 2 years, i worked mainly part-time but i also worked full-time during the summer and winter holidays. i learned a lot about customer service, teamwork, and time management. it was a great experience that
+          helped me develop my communication skills and ability to work under pressure. Lets say that i know my ways of handling different types of customers and situations, and i am confident in my ability to provide excellent service and create a positive experience for customers.
         </p>
       </div>
     </section>

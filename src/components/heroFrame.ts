@@ -1,12 +1,12 @@
 /**
- * Placeholder "frame sequence" renderer for the cinematic hero.
+ * Procedurally drawn blueprint/schematic scene for the cinematic hero,
+ * parameterized by scroll progress (0..1). This is the deliberate visual
+ * style for the hero, not a stand-in for photography.
  *
- * Draws a blueprint/schematic scene procedurally, parameterized by scroll
- * progress (0..1), standing in for a real pre-rendered frame sequence.
- *
- * To swap in real frames later: preload an array of HTMLImageElement/
- * ImageBitmap (e.g. /public/frames/0001.webp..NNNN.webp), then replace the
- * body of drawFrame with `ctx.drawImage(frames[Math.round(progress * (frames.length - 1))], 0, 0, w, h)`.
+ * To swap in a real frame sequence later: preload an array of
+ * HTMLImageElement/ImageBitmap (e.g. /public/frames/0001.webp..NNNN.webp),
+ * then replace the body of drawFrame with
+ * `ctx.drawImage(frames[Math.round(progress * (frames.length - 1))], 0, 0, w, h)`.
  * The caller already recomputes on every scroll update and on resize, so
  * no other wiring changes.
  */
@@ -15,6 +15,51 @@ const CYAN = "110, 231, 255";
 
 function clamp01(n: number) {
   return Math.min(Math.max(n, 0), 1);
+}
+
+// Deterministic pseudo-random in [0, 1), seeded so particles/dust stay
+// stable across frames instead of jittering every redraw.
+function hashRandom(seed: number) {
+  const x = Math.sin(seed * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+}
+
+function drawParticles(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  progress: number
+) {
+  const count = 60;
+  for (let i = 0; i < count; i++) {
+    const seedX = hashRandom(i * 7.13);
+    const seedY = hashRandom(i * 3.71 + 1);
+    const speed = 0.15 + hashRandom(i * 5.9 + 2) * 0.35;
+    const x = seedX * w;
+    const y = (seedY * h - progress * h * speed) % h;
+    const wrappedY = y < 0 ? y + h : y;
+    const size = 0.6 + hashRandom(i * 2.3 + 3) * 1.4;
+    const alpha = 0.15 + hashRandom(i * 4.1 + 4) * 0.35;
+
+    ctx.beginPath();
+    ctx.arc(x, wrappedY, size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${CYAN}, ${alpha})`;
+    ctx.fill();
+  }
+}
+
+function drawGlow(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  radius: number,
+  alpha: number
+) {
+  const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+  glow.addColorStop(0, `rgba(${CYAN}, ${alpha})`);
+  glow.addColorStop(1, `rgba(${CYAN}, 0)`);
+  ctx.fillStyle = glow;
+  ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
 }
 
 function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number) {
@@ -172,10 +217,12 @@ export function drawFrame(
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, w, h);
 
-  drawGrid(ctx, w, h);
-
   const cx = w / 2;
   const cy = h / 2;
+
+  drawGlow(ctx, cx, cy, Math.max(w, h) * 0.55, 0.08);
+  drawGrid(ctx, w, h);
+  drawParticles(ctx, w, h, p);
 
   drawTraces(ctx, cx, cy, w, h, p);
 

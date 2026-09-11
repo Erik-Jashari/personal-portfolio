@@ -54,43 +54,70 @@ export default function Home() {
 
       <main className="relative bg-background">
         <Reveal>
-          <section id="about" className="mx-auto max-w-3xl px-6 py-32">
-            <h2 className="font-display text-4xl text-white sm:text-5xl">
-              About
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-muted">
-              I&apos;m a Computer Science and Engineering student at UBT, Kosovo,
-              building full-stack projects end to end &mdash; from schema design
-              and auth to real-time features and the UI on top. I like picking
-              apart how things work and shipping practical, working software
-              over polishing theory. Outside of code, I&apos;m usually behind
-              the bar pulling shots between pull requests.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm uppercase tracking-wide text-muted">
-              <a
-                href="https://github.com/Erik-Jashari"
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors hover:text-accent"
-              >
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/eriki-jashari-204752354/"
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors hover:text-accent"
-              >
-                LinkedIn
-              </a>
+          <section id="about" className="mx-auto max-w-5xl px-6 py-32">
+            <div className="grid gap-12 sm:grid-cols-[minmax(0,380px)_1fr] sm:items-center sm:gap-16">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
+                {/* Swap this whole flex block for a portrait <Image fill /> when you have a photo — the surrounding card, border, and stats footer stay as-is. */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-8">
+                  <div className="relative flex h-44 w-44 items-center justify-center rounded-full border border-accent/30">
+                    <div className="absolute h-full w-full animate-pulse rounded-full border border-accent/10" />
+                    <span className="font-display text-5xl text-white">
+                      EJ
+                    </span>
+                  </div>
+                  <div className="text-center text-xs uppercase tracking-[0.3em] text-muted">
+                    <p>Backend &amp; full-stack</p>
+                    <p className="mt-1 text-accent/80">Ferizaj, Kosovo</p>
+                  </div>
+                </div>
+                <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 divide-x divide-white/10 border-t border-white/10 bg-black/30 text-center text-[10px] uppercase tracking-wide text-muted">
+                  <div className="px-2 py-3">
+                    <p className="text-white/60">Focus</p>
+                    <p className="mt-1">Full-stack</p>
+                  </div>
+                  <div className="px-2 py-3">
+                    <p className="text-white/60">Languages</p>
+                    <p className="mt-1">AL &middot; EN</p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h2 className="font-display text-4xl text-white sm:text-5xl">
+                  About
+                </h2>
+                <p className="mt-6 text-lg leading-relaxed text-muted">
+                  Hi i'm Erik Jashari, a student of a cumputer science and engineering at the University for Business and Technology (UBT) in Kosovo. I really enjoy bulding things that live on the internet, whether that be websites, applications, or anything in between and i am pretty intersted in trying new technologies and approaches and not staying in my comfort zone. My goal is to become a proficient full-stack developer and contribute to meaningful projects that make a positive impact and make a difference.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm uppercase tracking-wide text-muted">
+                  <a
+                    href="https://github.com/Erik-Jashari"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="transition-colors hover:text-accent"
+                  >
+                    GitHub
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/eriki-jashari-204752354/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="transition-colors hover:text-accent"
+                  >
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
             </div>
           </section>
         </Reveal>
 
-        <CoffeeSection />
+        <Reveal>
+          <CoffeeSection />
+        </Reveal>
 
         <Reveal>
-          <section id="work" className="mx-auto max-w-5xl px-6 py-32">
+          <section id="projects" className="mx-auto max-w-5xl px-6 py-32">
             <h2 className="font-display text-4xl text-white sm:text-5xl">
               Projects
             </h2>
