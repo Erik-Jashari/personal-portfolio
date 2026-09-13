@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { motion } from "framer-motion";
 import ProjectGallery, { type ProjectGalleryHandle } from "./ProjectGallery";
 
 type Project = {
@@ -29,8 +30,14 @@ export default function ProjectsSection({
           const hasImages = !!project.images?.length;
 
           return (
-            <div
+            <motion.div
               key={project.name}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              whileHover={{ y: -4 }}
+              whileTap={hasImages ? { scale: 0.985 } : undefined}
               role={hasImages ? "button" : undefined}
               tabIndex={hasImages ? 0 : undefined}
               onClick={() => {
@@ -91,7 +98,7 @@ export default function ProjectsSection({
                   images={project.images!}
                 />
               )}
-            </div>
+            </motion.div>
           );
         })}
       </div>

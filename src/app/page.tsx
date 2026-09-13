@@ -1,5 +1,4 @@
 import CinematicHero from "@/components/CinematicHero";
-import CoffeeSection from "@/components/CoffeeSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import Reveal from "@/components/Reveal";
 
@@ -122,10 +121,6 @@ export default function Home() {
               </div>
             </div>
           </section>
-        </Reveal>
-
-        <Reveal>
-          <CoffeeSection />
         </Reveal>
 
         <Reveal>
