@@ -5,6 +5,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HERO_PIN_END } from "./heroScroll";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
+import { useLenis } from "./SmoothScrollProvider";
+
+const NAV_OFFSET = -88;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,7 +21,19 @@ const LINKS = [
 
 export default function Nav() {
   const reducedMotion = usePrefersReducedMotion();
+  const lenis = useLenis();
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const target = document.querySelector(href);
+    if (!target) return;
+    e.preventDefault();
+    if (lenis) {
+      lenis.scrollTo(href, { offset: NAV_OFFSET });
+    } else {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -47,7 +62,11 @@ export default function Nav() {
           : "pointer-events-none -translate-y-full opacity-0"
       }`}
     >
-      <a href="#hero" className="font-display text-sm tracking-[0.3em] text-white">
+      <a
+        href="#hero"
+        onClick={(e) => handleNavClick(e, "#hero")}
+        className="font-display text-sm tracking-[0.3em] text-white"
+      >
         EJ
       </a>
       <ul className="flex gap-6 text-xs uppercase tracking-[0.25em] text-white/80">
@@ -55,6 +74,7 @@ export default function Nav() {
           <li key={link.href}>
             <a
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="transition-colors hover:text-accent"
             >
               {link.label}

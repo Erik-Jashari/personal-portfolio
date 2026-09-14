@@ -1,3 +1,4 @@
+import Image from "next/image";
 import CinematicHero from "@/components/CinematicHero";
 import ProjectsSection from "@/components/ProjectsSection";
 import Reveal from "@/components/Reveal";
@@ -68,19 +69,14 @@ export default function Home() {
           <section id="about" className="mx-auto max-w-5xl px-6 py-32">
             <div className="grid gap-12 sm:grid-cols-[minmax(0,380px)_1fr] sm:items-center sm:gap-16">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
-                {/* Swap this whole flex block for a portrait <Image fill /> when you have a photo — the surrounding card, border, and stats footer stay as-is. */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-8">
-                  <div className="relative flex h-44 w-44 items-center justify-center rounded-full border border-accent/30">
-                    <div className="absolute h-full w-full animate-pulse rounded-full border border-accent/10" />
-                    <span className="font-display text-5xl text-white">
-                      EJ
-                    </span>
-                  </div>
-                  <div className="text-center text-xs uppercase tracking-[0.3em] text-muted">
-                    <p>Backend &amp; full-stack</p>
-                    <p className="mt-1 text-accent/80">Ferizaj, Kosovo</p>
-                  </div>
-                </div>
+                <Image
+                  src="/IMG_6935.jpeg"
+                  alt="Erik Jashari"
+                  fill
+                  sizes="(min-width: 640px) 380px, 100vw"
+                  className="object-cover"
+                  priority
+                />
                 <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 divide-x divide-white/10 border-t border-white/10 bg-black/30 text-center text-[10px] uppercase tracking-wide text-muted">
                   <div className="px-2 py-3">
                     <p className="text-white/60">Focus</p>
@@ -249,7 +245,7 @@ export default function Home() {
         </Reveal>
 
         <footer className="border-t border-white/10 px-6 py-8 text-center text-xs uppercase tracking-widest text-muted">
-          Built with Next.js, GSAP &amp; Lenis
+          
         </footer>
       </main>
     </>
