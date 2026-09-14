@@ -48,14 +48,14 @@ const EXPERIENCE = [
     org: "University for Business and Technology (UBT), Kosovo",
   },
   {
-    period: "2024 — Present",
-    role: "Barista & Waiter",
-    org: "Local Café, Ferizaj",
-  },
-  {
     period: "2022 — 2024",
     role: "Full-Stack Development Training (Back-End & Front-End)",
     org: "Shkolla Digjitale",
+  },
+  {
+    period: "2024 — Present",
+    role: "Barista & Waiter",
+    org: "Local Café, Ferizaj",
   },
 ];
 
@@ -124,17 +124,17 @@ export default function Home() {
         </Reveal>
 
         <Reveal>
-          <section id="skills" className="mx-auto max-w-5xl px-6 py-32">
+          <section id="skills" className="mx-auto max-w-5xl px-6 py-32 text-center">
             <h2 className="font-display text-4xl text-white sm:text-5xl">
               Skills
             </h2>
-            <div className="mt-10 flex flex-col gap-8">
+            <div className="mt-10 flex flex-col items-center gap-8">
               {SKILLS.map((group) => (
                 <div key={group.group}>
                   <p className="text-xs uppercase tracking-[0.3em] text-accent/80">
                     {group.group}
                   </p>
-                  <div className="mt-3 flex flex-wrap gap-x-8 gap-y-2">
+                  <div className="mt-3 flex flex-wrap justify-center gap-x-8 gap-y-2">
                     {group.items.map((skill) => (
                       <span
                         key={skill}

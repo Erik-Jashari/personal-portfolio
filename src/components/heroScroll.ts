@@ -4,6 +4,6 @@
  * to reveal itself). Referencing a pinned trigger's "bottom" from a second,
  * independent ScrollTrigger resolves against the element's un-pinned
  * natural height rather than the full pinned scroll distance — using the
- * same explicit "+=300%" end on both keeps them in sync.
+ * same explicit "+=200%" end on both keeps them in sync.
  */
-export const HERO_PIN_END = "+=250%";
+export const HERO_PIN_END = "+=200%";
