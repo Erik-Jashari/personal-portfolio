@@ -6,4 +6,4 @@
  * natural height rather than the full pinned scroll distance — using the
  * same explicit "+=300%" end on both keeps them in sync.
  */
-export const HERO_PIN_END = "+=300%";
+export const HERO_PIN_END = "+=250%";
